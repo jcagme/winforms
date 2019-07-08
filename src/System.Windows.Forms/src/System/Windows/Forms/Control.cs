@@ -160,7 +160,7 @@ namespace System.Windows.Forms
             WM_GETCONTROLTYPE = SafeNativeMethods.RegisterWindowMessage("WM_GETCONTROLTYPE");
 
         }
-
+                
         internal const int STATE_CREATED = 0x00000001;
         internal const int STATE_VISIBLE = 0x00000002;
         internal const int STATE_ENABLED = 0x00000004;
@@ -3417,6 +3417,11 @@ namespace System.Windows.Forms
             return true;
 
         }
+
+        /// <summary>
+        ///     Stores information about the last button or combination pressed by the user. 
+        /// </summary>
+        private protected static Keys LastKeyData { get; set; }
 
         /// <summary>
         ///     The left coordinate of this control.

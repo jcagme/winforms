@@ -2461,7 +2461,12 @@ namespace System.Windows.Forms
                 case ArrowDirection.Right:
                     return GetNextItemHorizontal(start, forward: true);
                 case ArrowDirection.Left:
-                    return GetNextItemHorizontal(start, forward: false);
+                    bool forward = false;
+                    if ((LastKeyData == (Keys.Shift | Keys.Tab) && RightToLeft == RightToLeft.No) || (LastKeyData == Keys.Tab && RightToLeft == RightToLeft.Yes))
+                    {
+                        forward = true;
+                    }
+                    return GetNextItemHorizontal(start, forward);
                 case ArrowDirection.Down:
                     return GetNextItemVertical(start, down: true);
                 case ArrowDirection.Up:
@@ -3238,6 +3243,7 @@ namespace System.Windows.Forms
         protected override bool ProcessDialogKey(Keys keyData)
         {
             bool retVal = false;
+            LastKeyData = keyData;
 
             // Give the ToolStripItem first dibs
             ToolStripItem item = GetSelectedItem();
